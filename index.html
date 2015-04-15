@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<title>Graph portal</title>
+</head>
+<body>
+
+	<script type='text/x-handlebars' data-template-name='application'>
+		<header class="Header">
+			<nav>
+				<div class="nav-wrapper orange darken-2">
+					{{#link-to 'index' class="brand-logo"}} Graph Portal{{/link-to}}
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li>{{#link-to 'index'}}Accueil{{/link-to}}</li>
+						<li>{{#link-to 'generation'}}Génération de graphe{{/link-to}}</li>
+						<li>{{#link-to 'sssp'}}Single Source Shortest Path{{/link-to}}</li>
+						<li>{{#link-to 'spaningtree'}}Spaning tree{{/link-to}}</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+
+		<main class="container">
+			<!-- second div to avoid having a gap because of the clear:both -->
+			<div class="Main-content">
+			{{outlet}}
+			</div>
+		</main>
+
+		 <footer class="page-footer orange darken-2">
+			
+			<div class="footer-copyright">
+			<div class="container">
+				© 2015
+			</div>
+			</div>
+		</footer>
+	</script>
+
+	<script type='text/x-handlebars' data-template-name='index'>
+		<h1 class="header">Graphe courant</h1>
+
+		<div class="card blue-grey darken-1">
+			<div class="card-content white-text">
+			{{#each graph in model}}
+				<h2>liste des noeuds</h2>
+				{{#each node in graph.nodes}}
+					{{node.id}}
+				{{/each}}
+				
+				<h2>Liste des liens</h2>
+				<ul>
+				{{#each link in graph.links}}
+					<li>
+						{{#each node in link.nodes}}
+						{{node.id}}
+						{{/each}}
+					</li>
+				{{/each}}
+				</ul>
+			{{/each}}
+			</div>
+		</div>
+	</script>
+
+	<script type='text/x-handlebars' data-template-name='generation'>
+		<h1 class="header"> Génération de graphe </h1>
+		
+	</script>
+	
+	<script type='text/x-handlebars' data-template-name='sssp'>
+		<h1 class="header"> Single Shortest Source Path </h1>
+	</script>
+
+	<script type='text/x-handlebars' data-template-name='spaningtree'>
+		<h1 class="header"> Spaning tree </h1>
+	</script>
+
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<link rel="stylesheet" href="bower_components/materialize/dist/js/materialize.js">
+	<script src="bower_components/vis/dist/vis.js"></script>
+	<script src="bower_components/ember/ember.debug.js"></script>
+	<script src="bower_components/ember/ember-template-compiler.js"></script>
+	<script src="bower_components/ember-data/ember-data.js"></script>
+	<script src="js/application.js"></script>
+	<script src="js/chrome.js"></script>
+</body>
+</html>

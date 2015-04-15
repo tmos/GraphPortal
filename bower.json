@@ -1,0 +1,10 @@
+{
+  "name": "graph-portal",
+  "dependencies": {
+    "jquery": "^1.11.1",
+    "ember": "1.10.0",
+    "ember-data": "1.0.0-beta.16",
+    "vis": "3.11.0",
+    "materialize": "0.96.1"
+  }
+}
