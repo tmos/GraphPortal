@@ -41,46 +41,63 @@
 	</script>
 
 	<script type='text/x-handlebars' data-template-name='index'>
-		<h1 class="header">Graphe courant</h1>
-
-		<div class="card blue-grey darken-1">
-			<div class="card-content white-text">
-			{{#each graph in model}}
-				<h2>liste des noeuds</h2>
-				{{#each node in graph.nodes}}
-					{{node.id}}
-				{{/each}}
-				
-				<h2>Liste des liens</h2>
-				<ul>
-				{{#each link in graph.links}}
-					<li>
-						{{#each node in link.nodes}}
+		
+		{{#if model}}
+			<h1 class="header">Graphe courant</h1>
+			
+			<div class="card blue-grey darken-1">
+				<div class="card-content white-text">
+				{{#each graph in model}}
+					<h2>liste des noeuds</h2>
+					{{#each node in graph.nodes}}
 						{{node.id}}
-						{{/each}}
-					</li>
+					{{/each}}
+					
+					<h2>Liste des liens</h2>
+					<ul>
+					{{#each link in graph.links}}
+						<li>
+							{{#each node in link.nodes}}
+							{{node.id}}
+							{{/each}}
+						</li>
+					{{/each}}
+					</ul>
 				{{/each}}
-				</ul>
-			{{/each}}
+				</div>
 			</div>
-		</div>
+		{{else}}
+
+			<h1 className="header">Aucun graphe généré</h1>
+
+			{{#link-to 'generation'}}En générer un !{{/link-to}}
+
+		{{/if}}
+
 	</script>
 
 	<script type='text/x-handlebars' data-template-name='generation'>
 		<h1 class="header"> Génération de graphe </h1>
 		
+		{{input type="number" step="1" name="numberOfNodes" id="numberOfNodes"}}
+
+		{{input type="number" min="1" max="100" step="1" name="complexity" id="complexity"}}
+		
+		<button {{action 'generation'}}>Générer un graphe</button>
 	</script>
 	
 	<script type='text/x-handlebars' data-template-name='sssp'>
 		<h1 class="header"> Single Shortest Source Path </h1>
+		<button {{action 'sssp'}}>Single Shortest Source Path</button>
 	</script>
 
 	<script type='text/x-handlebars' data-template-name='spaningtree'>
 		<h1 class="header"> Spaning tree </h1>
+		<button {{action 'spaningtree'}}>Spaning Tree</button>
 	</script>
 
 	<script src="bower_components/jquery/dist/jquery.js"></script>
-	<link rel="stylesheet" href="bower_components/materialize/dist/js/materialize.js">
+	<script src="bower_components/materialize/dist/js/materialize.js"></script>
 	<script src="bower_components/vis/dist/vis.js"></script>
 	<script src="bower_components/ember/ember.debug.js"></script>
 	<script src="bower_components/ember/ember-template-compiler.js"></script>
