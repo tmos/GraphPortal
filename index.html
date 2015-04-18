@@ -79,8 +79,10 @@
 	<script type='text/x-handlebars' data-template-name='generation'>
 		<h1 class="header"> Génération de graphe </h1>
 		
+		<label for="numberOfNodes">Nombre de noeuds</label>
 		{{input type="number" step="1" name="numberOfNodes" id="numberOfNodes"}}
 
+		<label for="complexity">Complexité</label>
 		{{input type="number" min="1" max="100" step="1" name="complexity" id="complexity"}}
 		
 		<button {{action 'generation'}}>Générer un graphe</button>

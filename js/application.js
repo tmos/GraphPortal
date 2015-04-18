@@ -28,8 +28,10 @@ App.GenerationController = Ember.Controller.extend({
 				type: "POST",
 				url: url,
 				data: data,
-				success: function(){
-					alert("ok");
+				success: function(data){
+					alert(data);
+
+					// Append a view of the new graph to the page
 				},
 				error: function(){
 					alert("ko");
