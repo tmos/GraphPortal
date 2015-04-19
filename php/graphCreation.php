@@ -1,20 +1,20 @@
-<?php 
+<?php
 
 $arr = array(
+	'size' => 4,
 	'nodes' => array(
 		array(
-			'links' => array(1,2),
+			'id' => 1,
 		),
 		array(
-			'links' => array(3,2),
+			'id' => 2,
 		),
 		array(
-			'links' => array(4,3,1),
+			'id' => 3,
 		),
 		array(
-			'links' => array(4),
+			'id' => 4,
 		)
-
 	),
 	'edges' => array(
 		array(

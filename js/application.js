@@ -1,8 +1,9 @@
 /** Initialisation and configuration */
-var App = Ember.Application.create({
+App = Ember.Application.create({
     LOG_TRANSITIONS: true
 });
 
+App.ApplicationStore = DS.Store.extend();
 App.ApplicationAdapter = DS.FixtureAdapter.extend();
 
 /** Routers */
@@ -17,6 +18,10 @@ App.Router.map(function() {
 App.GenerationController = Ember.Controller.extend({
 	actions: {
 		generation: function(){
+
+			// ????
+			var store = App.__container__.lookup('store:main');
+
 			var url = "php/graphCreation.php";
 
 			data = {
@@ -29,9 +34,31 @@ App.GenerationController = Ember.Controller.extend({
 				url: url,
 				data: data,
 				success: function(data){
-					alert(data);
+					var result = $.parseJSON(data);
+					
+					// Save the new graph in the fixtures
+					var id = 1;
+					graph = 1;
+					
+					// Create the nodes
+					for (var i = result.nodes.length - 1; i >= 0; i--) {
+						store.createRecord('node',{
+							id:id++,
+							links:result.nodes[i].links,
+							graph:graph
+						});
+					};
 
-					// Append a view of the new graph to the page
+					id=1;
+					// Create the links
+					for (var i = result.edges.length - 1; i >= 0; i--) {
+						store.createRecord('link', {
+							id:id++,
+							nodes: result.edges[i].nodes,
+							weight: result.edges[i].weight
+						});
+					};
+					
 				},
 				error: function(){
 					alert("ko");
@@ -90,10 +117,10 @@ App.Graph.FIXTURES = [
 ];
 
 App.Node.FIXTURES = [
-	{ id: 1, links: [1,2], graph: 1 },
-	{ id: 2, links: [3,2], graph: 1 },
-	{ id: 3, links: [4,3,1], graph: 1 },
-	{ id: 4, links: [4], graph: 1 }
+	{ id: 1, graph: 1 },
+	{ id: 2, graph: 1 },
+	{ id: 3, graph: 1 },
+	{ id: 4, graph: 1 }
 ];
 
 App.Link.FIXTURES = [
