@@ -1,45 +1,61 @@
 <?php
 
+$maxN = 4; // mette numberOfNodes la
+$maxE = ($maxN*($maxN-1))/2;
+$nodes = array();
+
+for($i = 1; $i <= $maxN; $i++) {
+  $nodes[] = array('id' => $i);
+}
+
+// generate random edges
+$e = [];
+for($n = 1; $n <= $maxE || count($e) < 3; $n++) {
+  $e[] = [rand(1, $maxN), rand(1, $maxN)];
+
+  // remove duplicates and self-loops
+  $dup = [];
+  foreach($e as $i => $v) {
+    if ($v[0] == $v[1]) {
+      unset($e[$i]);
+      $n--;
+    }
+    $d = $v[0].':'.$v[1];
+
+    if (isset($dup[$d])) {
+      unset($e[$i]);
+      $n--;
+    } else {
+      $dup[$d] = true;
+    }
+
+    foreach($e as $a => $j) {
+      if ($j[0] == $v[1] && $j[1] == $v[0]) {
+        unset($e[$a]);
+      }
+    }
+  }
+}
+
+
+
+$edges = array();
+
+foreach($e as $edge) {
+  list($from, $to) = $edge;
+  $tempEdge = array();
+  $tempEdge['nodes'] = array($from, $to);
+  $tempEdge['weight'] = rand(1,10);
+  $edges[] = $tempEdge;
+}
+
+
 $arr = array(
-	'size' => 4,
-	'nodes' => array(
-		array(
-			'id' => 1,
-		),
-		array(
-			'id' => 2,
-		),
-		array(
-			'id' => 3,
-		),
-		array(
-			'id' => 4,
-		)
-	),
-	'edges' => array(
-		array(
-			'nodes' => array(1,3),
-			'weight' => 1
-		),
-		array(
-			'nodes' => array(1,2),
-			'weight' => 2
-		),
-		array(
-			'nodes' => array(2,3),
-			'weight' => 7
-		),
-		array(
-			'nodes' => array(4,3),
-			'weight' => 3
-		),
-	)
+  'size' => $maxN,
+  'nodes' => $nodes,
+  'edges' => $edges
 );
 
-/*
- * Human readable debug
- * echo '<pre>'.json_encode($arr, JSON_PRETTY_PRINT).'</pre>';
- *
- */
+echo '<pre>'.json_encode($arr, JSON_PRETTY_PRINT).'</pre>';
 
-echo json_encode($arr);
+?>
