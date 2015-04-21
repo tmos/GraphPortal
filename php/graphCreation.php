@@ -6,6 +6,7 @@ if (isset($_POST['numberOfNodes'])) {
 }
 
 $maxE = ($maxN*($maxN-1))/2;
+$minE = $maxN - 1;
 $nodes = array();
 
 for($i = 1; $i <= $maxN; $i++) {
@@ -14,7 +15,7 @@ for($i = 1; $i <= $maxN; $i++) {
 
 // generate random edges
 $e = [];
-for($n = 1; $n <= $maxE || count($e) < 3; $n++) {
+for($n = 1; $n <= $maxE || count($e) < $minE; $n++) {
   $e[] = [rand(1, $maxN), rand(1, $maxN)];
 
   // remove duplicates and self-loops
@@ -40,8 +41,6 @@ for($n = 1; $n <= $maxE || count($e) < 3; $n++) {
     }
   }
 }
-
-
 
 $edges = array();
 
