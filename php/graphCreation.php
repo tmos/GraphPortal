@@ -1,7 +1,10 @@
 <?php
-var_dump($_POST);
+if (isset($_POST['numberOfNodes'])) {
+  $maxN = $_POST['numberOfNodes'];  
+} else {
+  $maxN = 6;
+}
 
-$maxN = 5; // mettre numberOfNodes la
 $maxE = ($maxN*($maxN-1))/2;
 $nodes = array();
 
