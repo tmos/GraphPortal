@@ -1,6 +1,7 @@
 <?php
+var_dump($_POST);
 
-$maxN = 4; // mettre numberOfNodes la
+$maxN = 5; // mettre numberOfNodes la
 $maxE = ($maxN*($maxN-1))/2;
 $nodes = array();
 
