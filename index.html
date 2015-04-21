@@ -13,7 +13,7 @@
 			<nav>
 				<div class="nav-wrapper orange darken-2">
 					{{#link-to 'index' class="brand-logo"}} Graph Portal{{/link-to}}
-					<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<ul id="nav-mobile" class="right">
 						<li>{{#link-to 'index'}}Accueil{{/link-to}}</li>
 						<li>{{#link-to 'generation'}}Génération de graphe{{/link-to}}</li>
 						<li>{{#link-to 'sssp'}}Single Source Shortest Path{{/link-to}}</li>
@@ -79,21 +79,18 @@
 		
 		<label for="numberOfNodes">Nombre de noeuds</label>
 		{{input type="number" min="2" step="1" name="numberOfNodes" id="numberOfNodes"}}
-
-		<label for="complexity">Complexité</label>
-		{{input type="number" min="1" max="100" step="1" name="complexity" id="complexity"}}
 		
 		<button class="waves-effect waves-light purple btn" {{action 'generation'}}>Générer un graphe</button>
 	</script>
 	
 	<script type='text/x-handlebars' data-template-name='sssp'>
 		<h1 class="header"> Single Shortest Source Path </h1>
-		<button {{action 'sssp'}}>Single Shortest Source Path</button>
+		<button class="waves-effect waves-light purple btn" {{action 'sssp'}}>Single Shortest Source Path</button>
 	</script>
 
 	<script type='text/x-handlebars' data-template-name='spaningtree'>
 		<h1 class="header"> Spaning tree </h1>
-		<button {{action 'spaningtree'}}>Spaning Tree</button>
+		<button class="waves-effect waves-light purple btn" {{action 'spaningtree'}}>Spaning Tree</button>
 	</script>
 
 	<script src="bower_components/jquery/dist/jquery.js"></script>
