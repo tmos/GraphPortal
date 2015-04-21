@@ -1,5 +1,6 @@
 <?php
 $recu='{"size":6,"nodes":[{"id":1},{"id":2},{"id":3},{"id":4},{"id":5},{"id":6}],"edges":[{"nodes":[0,1],"weight":1},{"nodes":[0,2],"weight":2},{"nodes":[1,2],"weight":1},{"nodes":[1,3],"weight":3},{"nodes":[1,4],"weight":2},{"nodes":[2,3],"weight":1},{"nodes":[2,4],"weight":2},{"nodes":[3,4],"weight":4},{"nodes":[4,5],"weight":3}]}';
+//or $recu=$_POST["graph"];
 $graphe=array();
 $graphe=json_decode($recu, true);
 
