@@ -58,8 +58,9 @@
 					{{#each link in graph.links}}
 						<li>
 							{{#each node in link.nodes}}
-							{{node.id}}
+								{{node.id}}
 							{{/each}}
+							 - {{link.weight}}
 						</li>
 					{{/each}}
 					</ul>
