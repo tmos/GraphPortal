@@ -55,12 +55,12 @@
 					
 					<h2>Liste des liens</h2>
 					<ul>
-					{{#each link in graph.links}}
+					{{#each edge in graph.edges}}
 						<li>
-							{{#each node in link.nodes}}
+							{{#each node in edge.nodes}}
 								{{node.id}}
 							{{/each}}
-							 - {{link.weight}}
+							 - {{edge.weight}}
 						</li>
 					{{/each}}
 					</ul>

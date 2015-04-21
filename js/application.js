@@ -36,40 +36,47 @@ App.GenerationController = Ember.Controller.extend({
 						id:1
 					});
 					
-					// Create the nodes
-					for (var i = 1; i <= result.nodes.length; i++) {
-						var newNode = store.createRecord('node',{
-							id:i,
-							graph:currentGraph
-						});
-						// Push the node in the graph's list
-						currentGraph.get('nodes').then(function(nodes){
-							nodes.pushObject(newNode);
-						});
+					// Create the edges
+					for (var i = 1; i <= result.edges.length; i++) {
+						console.log("new edge");
+						// The json edge
+						var edge = result.edges[i-1];
 
-					};
-					
-					// Create the links
-					for (var i = 0; i < result.edges.length; i++) {
-						var edge = result.edges[i];
-						var newLink = store.createRecord('link', {
-							id:i+1,
+						// The new edge record
+						var newEdge = store.createRecord('edge', {
+							id:i,
 							weight: edge.weight,
 							graph:currentGraph
 						});
-						// Push the nodes in the link's list
+
+						// Push the nodes in the edge's list
 						for (var j = 0; j < 2; j++) {
-							
-							var theNode = store.find('node', edge.nodes[j]);
-							
-							newLink.get('nodes').then(function(nodeList){
-								nodeList.addObject(theNode);
+							// Create the nodes of the edge
+							var idCurrentEdge = edge.nodes[j];
+							var currentNode;
+							if (store.hasRecordForId('node', idCurrentEdge)) {
+								// If the node as already been created
+								currentNode = store.getById('node', idCurrentEdge);
+							} else {
+								// If the node doesn't exists yet
+								currentNode = store.createRecord('node',{
+									id: idCurrentEdge,
+									graph: currentGraph
+								});
+							}
+
+							// Push the node in the edge's list
+							newEdge.get('nodes').addObject(currentNode);
+
+							// Push the node in the graph's list
+							currentGraph.get('nodes').then(function(graphNodeList){
+								graphNodeList.addObject(currentNode);
 							});
-							
 						};
-						// Push the link in the graph's list
-						currentGraph.get('links').then(function(links){
-							links.addObject(newLink);
+
+						// Push the edge in the graph's list
+						currentGraph.get('edges').then(function(graphEdgeList){
+							graphEdgeList.addObject(newEdge);
 						});
 					};
 				},
@@ -106,24 +113,24 @@ App.IndexRoute = Ember.Route.extend({
 /** Models */
 App.Graph = DS.Model.extend({
 	nodes: DS.hasMany('node', {async:true, inverse:'graph'}),
-	links: DS.hasMany('link', {async:true, inverse:'graph'})
+	edges: DS.hasMany('edge', {async:true, inverse:'graph'})
 });
 
 App.Node = DS.Model.extend({
 	graph: DS.belongsTo('graph', {async:true, inverse:'nodes'})
 });
 
-App.Link = DS.Model.extend({
+App.Edge = DS.Model.extend({
 	weight: DS.attr('number'),
 	nodes: DS.hasMany('node', {async:true, inverse:null}),
-	graph: DS.belongsTo('graph', {async:true, inverse:'links'})
+	graph: DS.belongsTo('graph', {async:true, inverse:'edges'})
 });
 
 App.Graph.FIXTURES = [
 	// {
 	// 	id: 1,
 	// 	nodes: [1,2,3,4],
-	// 	links: [1,2,3,4]
+	// 	edges: [1,2,3,4]
 	// }
 ];
 
@@ -134,7 +141,7 @@ App.Node.FIXTURES = [
 	// { id: 4, graph: 1 }
 ];
 
-App.Link.FIXTURES = [
+App.Edge.FIXTURES = [
 	// { id: 1, nodes: [1,3], weight: 1, graph: 1 },
 	// { id: 2, nodes: [1,2], weight: 2, graph: 1 },
 	// { id: 3, nodes: [2,3], weight: 7, graph: 1 },

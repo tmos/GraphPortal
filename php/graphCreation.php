@@ -1,6 +1,6 @@
 <?php
 
-$maxN = 4; // mette numberOfNodes la
+$maxN = 4; // mettre numberOfNodes la
 $maxE = ($maxN*($maxN-1))/2;
 $nodes = array();
 
