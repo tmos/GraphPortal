@@ -55,131 +55,149 @@
         <section>
           <h2>Multi technologies</h2>
           <ul>
-          	<li>Portail : Javascript</li>
-          	<li>Traitement des graphes : PHP</li>
+            <li>Portail : Javascript</li>
+            <li>Traitement des graphes : PHP</li>
           </ul>
           <p>Langages qui se complètent</p>
         </section>
 
         <section>
-        	<h2>Javascript</h2>
-        	<ul>
-        		<li>Instantané pour l'utilisateur</li>
-        		<li>Économise la bande passante pour le serveur et le client</li>
-        	</ul>
+          <h2>Javascript</h2>
+          <ul>
+            <li>Instantané pour l'utilisateur</li>
+            <li>Économise la bande passante pour le serveur et le client</li>
+          </ul>
         </section>
 
         <section>
-        	<h2>PHP</h2>
-        	<ul>
-        		<li>Traitements ponctuels</li>
-        		<li>Adapté au format requête/réponse</li>
-        	</ul>
+          <h2>PHP</h2>
+          <ul>
+            <li>Traitements ponctuels</li>
+            <li>Adapté au format requête/réponse</li>
+          </ul>
         </section>
 
         <section>
-        	<h2>Communication</h2>
-        	<ul>
-        		<li>JSON dans des requetes POST</li>
-        		<li>Format de données : Ember-data</li>
-        	</ul>
-        	<pre>
+          <h2>Communication</h2>
+          <ul>
+            <li>JSON dans des requetes POST</li>
+            <li>Format de données : Ember-data</li>
+          </ul>
+          <pre>
 
 /** Model */
 App.Graph = DS.Model.extend({
-	nodes: DS.hasMany('node', {async:true, inverse:'graph'}),
-	edges: DS.hasMany('edge', {async:true, inverse:'graph'})
+  nodes: DS.hasMany('node', {async:true, inverse:'graph'}),
+  edges: DS.hasMany('edge', {async:true, inverse:'graph'})
 });
 
 App.Node = DS.Model.extend({
-	graph: DS.belongsTo('graph', {async:true, inverse:'nodes'})
+  graph: DS.belongsTo('graph', {async:true, inverse:'nodes'})
 });
 
 App.Edge = DS.Model.extend({
-	weight: DS.attr('number'),
-	nodes: DS.hasMany('node', {async:true, inverse:null}),
-	graph: DS.belongsTo('graph', {async:true, inverse:'edges'})
+  weight: DS.attr('number'),
+  nodes: DS.hasMany('node', {async:true, inverse:null}),
+  graph: DS.belongsTo('graph', {async:true, inverse:'edges'})
 });
-        	</pre>
+          </pre>
         </section>
-		
-		<section>
-			<section>
-				<h1>Portail</h1>
-			</section>
 
-			<section>
-				<h2>Ember.js</h2>
-				<img src="http://voidcanvas.com/wp-content/uploads/2013/11/emberjs-logo-image.png" alt="">
-			</section>
+    <section>
+      <section>
+        <h1>Portail</h1>
+      </section>
 
-			<section>
-				<h2>Ember.js ?</h2>
-				<ul>
-					<li>Librairie frontend 100% Javascript</li>
-					<li>Développement très actif</li>
-					<li>Partie modèle encore en Beta...</li>
-				</ul>
-			</section>
+      <section>
+        <h2>Ember.js</h2>
+        <img src="http://voidcanvas.com/wp-content/uploads/2013/11/emberjs-logo-image.png" alt="">
+      </section>
 
-			<section>
-				<h2>Déboires</h2>
-				<ul>
-					<li class="fragment">Traitement <a href="https://github.com/tmos/fac_graphPortal/blob/7a350d5c75ffbb71129eb08a90330e8836c32c25/js/application.js">asynchrone</a> !</li>
-					<li class="fragment">This is undefined</li>
-				</ul>
-			</section>
-		</section>
+      <section>
+        <h2>Ember.js ?</h2>
+        <ul>
+          <li>Librairie frontend 100% Javascript</li>
+          <li>Développement très actif</li>
+          <li>Partie modèle encore en Beta...</li>
+        </ul>
+      </section>
 
-		<section>
-			<section>
-				<h1>Création de graphes</h1>
-			</section>
-			
-			<section>
-				
-			</section>
-			<section>
-				
-			</section>
-		</section>
+      <section>
+        <h2>Déboires</h2>
+        <ul>
+          <li class="fragment">Traitement <a href="https://github.com/tmos/fac_graphPortal/blob/7a350d5c75ffbb71129eb08a90330e8836c32c25/js/application.js">asynchrone</a> !</li>
+          <li class="fragment">This is undefined</li>
+        </ul>
+      </section>
+    </section>
 
-		<section>
-			<section>
-				<h1>Single Shortest Source Path</h1>
-			</section>
+    <section>
+      <section>
+        <h2>Création de graphes</h2>
+        <p>Soulève plusieurs problèmes</p>
+        <ul>
+          <li>Non répétition des arêtes</li>
+          <li>Densité d'apparition</li>
+          <li>Transformation en JSON</li>
+      </section>
 
-			<section>
-				<ul>
-					<li class="fragment">Traduire les données JSON</li>
-					<li class="fragment">Algorithme de Dijkstra</li>
-				</ul>
-			</section>
-		</section>
+      <section>
+        <pre>$e = [];
+for($n = 1; $n <= $maxE || count($e) < $minE; $n++) {
+  $e[] = [rand(1, $maxN), rand(1, $maxN)];
+  // remove duplicates and self-loops
+  $dup = [];
+  foreach($e as $i => $v) {
+    if ($v[0] == $v[1]) {
+      unset($e[$i]);
+      $n--;
+    }
+    $d = $v[0].':'.$v[1];
+    if (isset($dup[$d])) {
+      unset($e[$i]);
+      $n--;
+    } else {
+      $dup[$d] = true;
+    }
+    foreach($e as $a => $j) {
+      if ($j[0] == $v[1] && $j[1] == $v[0]) {
+        unset($e[$a]);
+      }
+    }
+  }
+}
+        </pre>
+      </section>
 
-		<section>
-			<section>
-				<h1>Spaning tree</h1>
-			</section>
 
-			<section>
-				<ul>
-					<li>Kruskhal</li>
-					<li>Prim</li>
-				</ul>
-			</section>
-		</section>
-		
-		<section>
-			<h1>Conclusion</h1>
-		</section>
+    <section>
+      <section>
+        <h2>Single Shortest Source Path</h2>
+          <li class="fragment">Traduire les données JSON</li>
+          <li class="fragment">Algorithme de Dijkstra</li>
+        </ul>
+      </section>
+    </section>
 
-		<section>
-			<ul>
-				<li class="fragment">Ralentissements sur la partie mathématique</li>
-				<li class="fragment">Outil en béta, pas forcément un bon choix</li>
-			</ul>
-		</section>
+    <section>
+      <section>
+        <h2>Spaning tree</h2>
+          <li>Kruskhal</li>
+          <li>Prim</li>
+        </ul>
+      </section>
+    </section>
+
+    <section>
+      <h1>Conclusion</h1>
+    </section>
+
+    <section>
+      <ul>
+        <li class="fragment">Ralentissements sur la partie mathématique</li>
+        <li class="fragment">Outil en béta, pas forcément un bon choix</li>
+      </ul>
+    </section>
 
       </div>
     </div>
