@@ -70,5 +70,3 @@ for ($k = 0; $k < $nb_noeud; ++$k) {
 }
 
 echo json_encode($d);
-?>
->>>>>>> ac452bcdf159ff32474382668b31145d3ba6e683
