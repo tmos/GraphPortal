@@ -56,6 +56,7 @@ $arr = array(
   'edges' => $edges
 );
 
-echo '<pre>'.json_encode($arr, JSON_PRETTY_PRINT).'</pre>';
+//echo '<pre>'.json_encode($arr, JSON_PRETTY_PRINT).'</pre>';
+echo json_encode($arr);
 
 ?>
