@@ -2,7 +2,7 @@
 App = Ember.Application.create({
     LOG_TRANSITIONS: true
 });
-App.ApplicationStore = DS.Store.extend();
+//App.ApplicationStore = DS.Store.extend();
 App.ApplicationAdapter = DS.FixtureAdapter.extend();
 
 /** Routers */
@@ -19,9 +19,8 @@ App.GenerationController = Ember.Controller.extend({
 		generation: function(){
 			var url = "php/graphCreation.php";
 			var store = this.store;
-			data = {
+			var data = {
 				numberOfNodes: $('#numberOfNodes').val(),
-				complexity: $('#complexity').val()
 			};
 
 			$.ajax({
@@ -90,12 +89,9 @@ App.SsspController = Ember.Controller.extend({
 	actions: {
 		sssp: function(){
 			var url = "php/sssp.php";
-
 			var store = this.store;
-			
-			data = {
-				numberOfNodes: $('#numberOfNodes').val(),
-				complexity: $('#complexity').val()
+			var data = {
+				graph: store.getById('graph', 1)
 			};
 
 			$.ajax({
@@ -103,7 +99,7 @@ App.SsspController = Ember.Controller.extend({
 				url: url,
 				data: data,
 				success: function(data){
-					alert(ok);
+					alert(data);
 				},
 				error: function(){
 					alert("ko");
@@ -115,26 +111,6 @@ App.SsspController = Ember.Controller.extend({
 App.SpaningtreeController = Ember.Controller.extend({
 	actions: {
 		spaningtree: function(){
-			var url = "php/spaningTree.php";
-
-			var store = this.store;
-			
-			data = {
-				numberOfNodes: $('#numberOfNodes').val(),
-				complexity: $('#complexity').val()
-			};
-
-			$.ajax({
-				type: "POST",
-				url: url,
-				data: data,
-				success: function(data){
-					alert(ok);
-				},
-				error: function(){
-					alert("ko");
-				}
-			});
 			
 		}
 	}
