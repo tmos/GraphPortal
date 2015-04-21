@@ -20,8 +20,8 @@ App.GenerationController = Ember.Controller.extend({
 			var url = "php/graphCreation.php";
 			var store = this.store;
 			data = {
-				numberOfNodes: $('#numberOfNodes').value,
-				complexity: $('#complexity').value
+				numberOfNodes: $('#numberOfNodes').val(),
+				complexity: $('#complexity').val()
 			};
 
 			$.ajax({
@@ -38,7 +38,6 @@ App.GenerationController = Ember.Controller.extend({
 					
 					// Create the edges
 					for (var i = 1; i <= result.edges.length; i++) {
-						console.log("new edge");
 						// The json edge
 						var edge = result.edges[i-1];
 
@@ -91,6 +90,25 @@ App.SsspController = Ember.Controller.extend({
 	actions: {
 		sssp: function(){
 			var url = "php/sssp.php";
+
+			var store = this.store;
+			
+			data = {
+				numberOfNodes: $('#numberOfNodes').val(),
+				complexity: $('#complexity').val()
+			};
+
+			$.ajax({
+				type: "POST",
+				url: url,
+				data: data,
+				success: function(data){
+					alert(ok);
+				},
+				error: function(){
+					alert("ko");
+				}
+			});
 		}
 	}
 });
@@ -98,6 +116,25 @@ App.SpaningtreeController = Ember.Controller.extend({
 	actions: {
 		spaningtree: function(){
 			var url = "php/spaningTree.php";
+
+			var store = this.store;
+			
+			data = {
+				numberOfNodes: $('#numberOfNodes').val(),
+				complexity: $('#complexity').val()
+			};
+
+			$.ajax({
+				type: "POST",
+				url: url,
+				data: data,
+				success: function(data){
+					alert(ok);
+				},
+				error: function(){
+					alert("ko");
+				}
+			});
 			
 		}
 	}
@@ -126,24 +163,6 @@ App.Edge = DS.Model.extend({
 	graph: DS.belongsTo('graph', {async:true, inverse:'edges'})
 });
 
-App.Graph.FIXTURES = [
-	// {
-	// 	id: 1,
-	// 	nodes: [1,2,3,4],
-	// 	edges: [1,2,3,4]
-	// }
-];
-
-App.Node.FIXTURES = [
-	// { id: 1, graph: 1 },
-	// { id: 2, graph: 1 },
-	// { id: 3, graph: 1 },
-	// { id: 4, graph: 1 }
-];
-
-App.Edge.FIXTURES = [
-	// { id: 1, nodes: [1,3], weight: 1, graph: 1 },
-	// { id: 2, nodes: [1,2], weight: 2, graph: 1 },
-	// { id: 3, nodes: [2,3], weight: 7, graph: 1 },
-	// { id: 4, nodes: [4,3], weight: 3, graph: 1 }
-];
+App.Graph.FIXTURES = [];
+App.Node.FIXTURES = [];
+App.Edge.FIXTURES = [];

@@ -68,11 +68,8 @@
 				</div>
 			</div>
 		{{else}}
-
 			<h1 className="header">Aucun graphe généré</h1>
-
-			{{#link-to 'generation'}}En générer un !{{/link-to}}
-
+			{{#link-to 'generation' class="waves-effect waves-light purple btn"}}En générer un !{{/link-to}}
 		{{/if}}
 
 	</script>
@@ -81,12 +78,12 @@
 		<h1 class="header"> Génération de graphe </h1>
 		
 		<label for="numberOfNodes">Nombre de noeuds</label>
-		{{input type="number" step="1" name="numberOfNodes" id="numberOfNodes"}}
+		{{input type="number" min="2" step="1" name="numberOfNodes" id="numberOfNodes"}}
 
 		<label for="complexity">Complexité</label>
 		{{input type="number" min="1" max="100" step="1" name="complexity" id="complexity"}}
 		
-		<button {{action 'generation'}}>Générer un graphe</button>
+		<button class="waves-effect waves-light purple btn" {{action 'generation'}}>Générer un graphe</button>
 	</script>
 	
 	<script type='text/x-handlebars' data-template-name='sssp'>

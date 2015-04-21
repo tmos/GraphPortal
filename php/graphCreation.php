@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['numberOfNodes'])) {
-  $maxN = $_POST['numberOfNodes'];  
+  $maxN = $_POST['numberOfNodes'];
 } else {
   $maxN = 6;
 }
