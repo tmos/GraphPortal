@@ -45,13 +45,13 @@ foreach($graphe["edges"] as $arete){
 
 $mini;//variable qui memorise le chemin le plus court
 $visited[$nb_noeud]=array();//variable qui memorise les noeuds deja visites
- 
+
 for ($i = 0; $i < $nb_noeud; ++$i) {
         $d[$i] = INF;
         $visited[$i] = 0;//aucun noeud n'a encore été visité
 }
 $d[0] = 0;//le chemin du premier point au premier point = 0
- 
+
 for ($k = 0; $k < $nb_noeud; ++$k) {
         $mini = -1;
         for ($i = 0; $i < $nb_noeud; ++$i){
@@ -60,7 +60,7 @@ for ($k = 0; $k < $nb_noeud; ++$k) {
                 }
         }
         $visited[$mini] = 1;
- 
+
         for ($i = 0; $i < $nb_noeud; ++$i){
                 if ($dist[$mini][$i]){
                         if ($d[$mini] + $dist[$mini][$i] < $d[$i]){
@@ -70,4 +70,7 @@ for ($k = 0; $k < $nb_noeud; ++$k) {
         }
 }
 
-echo json_encode($d);
+echo '<pre>'.json_encode($graphe, JSON_PRETTY_PRINT).'</pre>';
+echo '<pre>'.json_encode($d, JSON_PRETTY_PRINT).'</pre>';
+
+//echo json_encode($d);
