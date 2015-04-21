@@ -1,105 +1,191 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.css">
-	<link rel="stylesheet" href="css/styles.css">
-	<title>Graph portal</title>
-</head>
-<body>
+<!doctype html>
+<html lang="en">
 
-	<script type='text/x-handlebars' data-template-name='application'>
-		<header class="Header">
-			<nav>
-				<div class="nav-wrapper orange darken-2">
-					{{#link-to 'index' class="brand-logo"}} Graph Portal{{/link-to}}
-					<ul id="nav-mobile" class="right">
-						<li>{{#link-to 'index'}}Accueil{{/link-to}}</li>
-						<li>{{#link-to 'generation'}}Génération de graphe{{/link-to}}</li>
-						<li>{{#link-to 'sssp'}}Single Source Shortest Path{{/link-to}}</li>
-						<li>{{#link-to 'spaningtree'}}Spaning tree{{/link-to}}</li>
-					</ul>
-				</div>
-			</nav>
-		</header>
+  <head>
+    <meta charset="utf-8">
 
-		<main class="container">
-			<!-- second div to avoid having a gap because of the clear:both -->
-			<div class="Main-content">
-			{{outlet}}
-			</div>
-		</main>
+    <title>graphPortal - Platform for graph manipulation</title>
 
-		 <footer class="page-footer orange darken-2">
+    <meta name="description" content="A platform for generate a random graph and use the Shortest Path Protocol and the Spanning Tree Protocol">
+    <meta name="author" content="Tom Canac">
+    <meta name="author" content="Bastien Courtois">
+    <meta name="author" content="Arthur Roussel">
+    <meta name="author" content="Jérémy Spieldenner">
+
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/league.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Graph Portal</h1>
+          <h3>Le portail de manipulation de graphe</h3>
+          <p>
+            <small>Tom Canac | Bastien Courtois | Arthur Roussel | Jérémy Spieldenner</small>
+          </p>
+        </section>
+
+        <section>
+          <h2>Multi technologies</h2>
+          <ul>
+          	<li>Portal : full javascript</li>
+          	<li>Traitement des graphes : php</li>
+          </ul>
+          <p>2 langages qui se complètent</p>
+        </section>
+
+        <section>
+        	<h2>javascript</h2>
+        	<ul>
+        		<li>Instantané pour l'utilisateur</li>
+        		<li>Économise la bande passante pour le serveur et le client</li>
+        	</ul>
+        </section>
+
+        <section>
+        	<h2>php</h2>
+        	<ul>
+        		<li>Traitements ponctuels</li>
+        		<li>Adapté au format requête/réponse</li>
+        	</ul>
+        </section>
+		
+		<section>
+			<section>
+				<h1>Portail</h1>
+			</section>
+
+			<section>
+				<h2>Ember.js</h2>
+				<img src="http://voidcanvas.com/wp-content/uploads/2013/11/emberjs-logo-image.png" alt="">
+			</section>
+
+			<section>
+				<h2>Ember.js ?</h2>
+				<ul>
+					<li>Librairie frontend 100% Javascript</li>
+					<li>Développement très actif</li>
+					<li>Partie modèle encore en Beta...</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Déboires</h2>
+				<ul>
+					<li class="fragment">Traitement asynchrone !</li>
+					<li class="fragment">This is undefined</li>
+				</ul>
+			</section>
+		</section>
+
+		<section>
+			<section>
+				<h1>Création de graphes</h1>
+			</section>
 			
-			<div class="footer-copyright">
-			<div class="container">
-				© 2015
-			</div>
-			</div>
-		</footer>
-	</script>
+			<section>
+				
+			</section>
+			<section>
+				
+			</section>
+		</section>
 
-	<script type='text/x-handlebars' data-template-name='index'>
+		<section>
+			<section>
+				<h1>Single Shortest Source Path</h1>
+			</section>
+
+			<section>
+				<ul>
+					<li class="fragment">Traduire les données JSON</li>
+					<li class="fragment">Algorithme de Dijkstra</li>
+				</ul>
+			</section>
+		</section>
+
+		<section>
+			<section>
+				<h1>Spaning tree</h1>
+			</section>
+
+			<section>
+				
+			</section>
+
+			<section>
+				
+			</section>
+		</section>
 		
-		{{#if model}}
-			<h1 class="header">Graphe courant</h1>
-			
-			<div class="card blue-grey darken-1">
-				<div class="card-content white-text">
-				{{#each graph in model}}
-					<h2>liste des noeuds</h2>
-					{{#each node in graph.nodes}}
-						{{node.id}}
-					{{/each}}
-					
-					<h2>Liste des liens</h2>
-					<ul>
-					{{#each edge in graph.edges}}
-						<li>
-							{{#each node in edge.nodes}}
-								{{node.id}}
-							{{/each}}
-							 - {{edge.weight}}
-						</li>
-					{{/each}}
-					</ul>
-				{{/each}}
-				</div>
-			</div>
-		{{else}}
-			<h1 className="header">Aucun graphe généré</h1>
-			{{#link-to 'generation' class="waves-effect waves-light purple btn"}}En générer un !{{/link-to}}
-		{{/if}}
+		<section>
+			<h1>Conclusion</h1>
+		</section>
 
-	</script>
+		<section>
+			<ul>
+				<li class="fragment">Ralentissements sur la partie mathématique</li>
+				<li class="fragment">Outil en béta, pas forcément un bon choix</li>
+			</ul>
+		</section>
 
-	<script type='text/x-handlebars' data-template-name='generation'>
-		<h1 class="header"> Génération de graphe </h1>
-		
-		<label for="numberOfNodes">Nombre de noeuds</label>
-		{{input type="number" min="2" step="1" name="numberOfNodes" id="numberOfNodes"}}
-		
-		<button class="waves-effect waves-light purple btn" {{action 'generation'}}>Générer un graphe</button>
-	</script>
-	
-	<script type='text/x-handlebars' data-template-name='sssp'>
-		<h1 class="header"> Single Shortest Source Path </h1>
-		<button class="waves-effect waves-light purple btn" {{action 'sssp'}}>Single Shortest Source Path</button>
-	</script>
+      </div>
+    </div>
 
-	<script type='text/x-handlebars' data-template-name='spaningtree'>
-		<h1 class="header"> Spaning tree </h1>
-		<button class="waves-effect waves-light purple btn" {{action 'spaningtree'}}>Spaning Tree</button>
-	</script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-	<script src="bower_components/jquery/dist/jquery.js"></script>
-	<script src="bower_components/materialize/dist/js/materialize.js"></script>
-	<script src="bower_components/vis/dist/vis.js"></script>
-	<script src="bower_components/ember/ember.debug.js"></script>
-	<script src="bower_components/ember/ember-template-compiler.js"></script>
-	<script src="bower_components/ember-data/ember-data.js"></script>
-	<script src="js/application.js"></script>
-	<script src="js/chrome.js"></script>
-</body>
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
 </html>
