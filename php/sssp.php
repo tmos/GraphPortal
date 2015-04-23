@@ -70,7 +70,7 @@ for ($k = 0; $k < $nb_noeud; ++$k) {
         }
 }
 
-echo '<pre>'.json_encode($graphe, JSON_PRETTY_PRINT).'</pre>';
-echo '<pre>'.json_encode($d, JSON_PRETTY_PRINT).'</pre>';
+//echo '<pre>'.json_encode($graphe, JSON_PRETTY_PRINT).'</pre>';
+//echo '<pre>'.json_encode($d, JSON_PRETTY_PRINT).'</pre>';
 
-//echo json_encode($d);
+echo json_encode($d);
