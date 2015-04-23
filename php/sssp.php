@@ -4,7 +4,7 @@ $recu=$_POST["graph"];
 $graphe=array();
 $graphe=json_decode($recu, true);
 
-$nb_noeud=$graphe["size"];
+$nb_noeud=count($graphe['nodes']);
 
 $d[$nb_noeud]=array();//variable pour definir le sssp
 
