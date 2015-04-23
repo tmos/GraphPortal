@@ -69,8 +69,8 @@ $(document).ready(function(){
                     var newEdge = result.edges[i];
                     graph.edges.push({
                         value: newEdge.weight,
-                        from: newEdge.nodes[0],
-                        to: newEdge.nodes[1]
+                        from: newEdge.from,
+                        to: newEdge.to
                     });
                 }
                 if (!pageVisu.is(":visible")) {
