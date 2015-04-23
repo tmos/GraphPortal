@@ -52,14 +52,12 @@ for($i=2;$i<=$nb_noeud;$i++){
 	$path[] = $a;
 	$path = array_reverse($path);
 
-	echo "<br />From $a to $b";
-	echo "<br />The length is ".$S[$b][1];
-	echo "<br />Path is ".implode('->', $path);
-	$d[$i]=array(
-		'value'=>$S[$b][1],
-		'from'=>$a,
-		'to'=>$b
-		);
+	$tmp = array();
+	$tmp['weight'] = $S[$b][1];
+	$tmp['from'] = $a;
+	$tmp['to'] = $b;
+
+	$d[]=$tmp;
 }
 echo json_encode($d);
 ?>
