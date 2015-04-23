@@ -1,4 +1,8 @@
-    /** Important variables */
+$(document).ready(function(){
+    $('.parallax').parallax();
+});
+
+/** Important variables */
         var graph = {
             nodes:[],
             edges:[]
@@ -71,7 +75,9 @@
                         isViewedOnce = true;
                         pageVisu.toggle();
                     }
-
+                    $(document.body).animate({
+                        'scrollTop':   $('#visualisation').offset().top
+                    }, 1000);
                     visuGraph();
                 },
                 error: function(){
@@ -104,6 +110,7 @@
                 success: function(data){
                     var result = $.parseJSON(data);
 
+                    pageSssp.toggle();
                     pageSpaningTree.toggle();
                 },
                 error: function(){
