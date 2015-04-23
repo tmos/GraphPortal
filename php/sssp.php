@@ -6,7 +6,6 @@ $recu=$_POST["graph"];
 $graphe=array();
 $graphe=json_decode($recu, true);
 $nb_noeud=$graphe["size"];
-$d[$nb_noeud]=array();
 
 $_distArr=array();
 for ($i=1;$i<=$nb_noeud;$i++){
@@ -56,7 +55,11 @@ for($i=2;$i<=$nb_noeud;$i++){
 	echo "<br />From $a to $b";
 	echo "<br />The length is ".$S[$b][1];
 	echo "<br />Path is ".implode('->', $path);
-	$d[$i]=$S[$b][1];
+	$d[$i]=array(
+		'value'=>$S[$b][1],
+		'from'=>$a,
+		'to'=>$b
+		);
 }
 echo json_encode($d);
 ?>
