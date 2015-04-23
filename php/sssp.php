@@ -1,10 +1,10 @@
 <?php
-$recu=$_POST["graph"];
-//$recu = '{"nodes":[{"id":1},{"id":2},{"id":3},{"id":4}],"edges":[{"value":2,"from":3,"to":1,"id":"f6ae9bf5-4523-71f2-3501-2bc748174fed"},{"value":4,"from":4,"to":2,"id":"39ab9f77-1eff-3771-c115-c446af32297b"},{"value":1,"from":1,"to":2,"id":"a50d84ff-cfa-1403-6edc-d009f85d5f31"},{"value":2,"from":3,"to":2,"id":"91625e4c-74a7-e3b3-e901-a3123dd642d1"},{"value":9,"from":3,"to":4,"id":"ecd1fa2f-9b58-14a4-e135-4873d15f4c0"},{"value":2,"from":4,"to":1,"id":"c41a607a-65f-d15d-65b6-b1cd9011be38"}],"size":"4"}';
+//$recu=$_POST["graph"];
+$recu = '{"nodes":[{"id":1},{"id":2},{"id":3},{"id":4}],"edges":[{"value":2,"from":3,"to":1,"id":"f6ae9bf5-4523-71f2-3501-2bc748174fed"},{"value":4,"from":4,"to":2,"id":"39ab9f77-1eff-3771-c115-c446af32297b"},{"value":1,"from":1,"to":2,"id":"a50d84ff-cfa-1403-6edc-d009f85d5f31"},{"value":2,"from":3,"to":2,"id":"91625e4c-74a7-e3b3-e901-a3123dd642d1"},{"value":9,"from":3,"to":4,"id":"ecd1fa2f-9b58-14a4-e135-4873d15f4c0"},{"value":2,"from":4,"to":1,"id":"c41a607a-65f-d15d-65b6-b1cd9011be38"}],"size":"4"}';
 $graphe=array();
 $graphe=json_decode($recu, true);
 
-$nb_noeud=count($graphe['nodes']);
+$nb_noeud=$graphe['size'];
 
 $d[$nb_noeud]=array();//variable pour definir le sssp
 
@@ -37,9 +37,17 @@ for ($i = 0; $i < $nb_noeud; ++$i){
 }
 
 foreach($graphe["edges"] as $arete){
-        $dist[$arete["nodes"][0]][$arete["nodes"][1]]=$arete["weight"];
-        $dist[$arete["nodes"][1]][$arete["nodes"][0]]=$arete["weight"];
+        $dist[$arete['from']][$arete['to']]=$arete['value'];
+        $dist[$arete['to']][$arete['from']]=$arete['value'];
 }
+
+echo $dist[1][3]."<br>";
+echo $dist[4][2]."<br>";
+echo $dist[1][2]."<br>";
+echo $dist[4][1]."<br>";
+echo $dist[3][4]."<br>";
+
+
 
 
 $mini;//variable qui memorise le chemin le plus court
@@ -68,5 +76,13 @@ for ($k = 0; $k < $nb_noeud; ++$k) {
                 }
         }
 }
-//echo $_POST["graph"];
-echo json_encode($d);
+
+echo count($d)."<br>";
+echo count($d[0])."<br>";
+echo count($d[1])."<br>";
+echo count($d[2])."<br>";
+echo count($d[3])."<br>";
+
+
+echo '<pre>'.json_encode($d, JSON_PRETTY_PRINT).'</pre>';
+//echo json_encode($d);
