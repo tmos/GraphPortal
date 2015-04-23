@@ -114,7 +114,7 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             url: "php/spaningTree.php",
-            data: JSON.stringify(graph),
+            data: {graph:JSON.stringify(graph)},
             success: function(data){
                 var result = $.parseJSON(data);
 
