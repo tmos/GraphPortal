@@ -1,11 +1,10 @@
 <?php
-$recu='{"size":6,"nodes":[{"id":1},{"id":2},{"id":3},{"id":4},{"id":5},{"id":6}],"edges":[{"nodes":[0,1],"weight":1},{"nodes":[0,2],"weight":2},{"nodes":[1,2],"weight":1},{"nodes":[1,3],"weight":3},{"nodes":[1,4],"weight":2},{"nodes":[2,3],"weight":1},{"nodes":[2,4],"weight":2},{"nodes":[3,4],"weight":4},{"nodes":[4,5],"weight":3}]}';
-//or $recu=$_POST["graph"];
+$recu=$_POST["graph"];
+//$recu = '{"nodes":[{"id":1},{"id":2},{"id":3},{"id":4}],"edges":[{"value":2,"from":3,"to":1,"id":"f6ae9bf5-4523-71f2-3501-2bc748174fed"},{"value":4,"from":4,"to":2,"id":"39ab9f77-1eff-3771-c115-c446af32297b"},{"value":1,"from":1,"to":2,"id":"a50d84ff-cfa-1403-6edc-d009f85d5f31"},{"value":2,"from":3,"to":2,"id":"91625e4c-74a7-e3b3-e901-a3123dd642d1"},{"value":9,"from":3,"to":4,"id":"ecd1fa2f-9b58-14a4-e135-4873d15f4c0"},{"value":2,"from":4,"to":1,"id":"c41a607a-65f-d15d-65b6-b1cd9011be38"}],"size":"4"}';
 $graphe=array();
 $graphe=json_decode($recu, true);
 
 $nb_noeud=$graphe["size"];
-
 
 $d[$nb_noeud]=array();//variable pour definir le sssp
 
@@ -69,8 +68,5 @@ for ($k = 0; $k < $nb_noeud; ++$k) {
                 }
         }
 }
-
-//echo '<pre>'.json_encode($graphe, JSON_PRETTY_PRINT).'</pre>';
-//echo '<pre>'.json_encode($d, JSON_PRETTY_PRINT).'</pre>';
-
+//echo $_POST["graph"];
 echo json_encode($d);
