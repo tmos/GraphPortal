@@ -96,7 +96,7 @@ function generation() {
             visuGraph(graph, firstGraphContainer);
         },
         error: function () {
-            alert("ko");
+            alert("Temps écoulé");
         }
     });
 };
@@ -124,7 +124,7 @@ function sssp() {
             myToogle(pageSssp);
         },
         error: function () {
-            alert("ko");
+            alert("Temps écoulé");
         }
     });
 };
@@ -139,7 +139,7 @@ function spaningTree() {
             visuGraph($.parseJSON(data), spaningGraphContainer);
         },
         error: function () {
-            alert("ko");
+            alert("Temps écoulé");
         }
     });
 };
@@ -147,7 +147,8 @@ function spaningTree() {
 function visuGraph(graph, container) {
     var options = {
         width: '900px',
-        height: '500px'
+        height: '500px',
+        zoomable: 'false'
         //,dataManipulation: {
         //    enabled: true,
         //    initiallyVisible: false
