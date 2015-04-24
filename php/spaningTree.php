@@ -35,8 +35,7 @@ $spanningNodes[] = $allNodes[0]['id'];
 $spanningEdges = array();
 
 
-$i = 0;
-while (count($spanningNodes) < count($allNodes) || $i == 500) {
+while (count($spanningNodes) < count($allNodes)) {
     $min = array(
         'value' => 11
     );
@@ -58,7 +57,6 @@ while (count($spanningNodes) < count($allNodes) || $i == 500) {
     }
     $spanningEdges[] = $min;
     $spanningNodes[] = $min['to'];
-    $i++;
 }
 $graph['edges'] = $spanningEdges;
 echo json_encode($graph);
