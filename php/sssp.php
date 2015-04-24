@@ -8,13 +8,6 @@ $graphe=json_decode($recu, true);
 $nb_noeud=$graphe["size"];
 
 $_distArr=array();
-for ($i=1;$i<=$nb_noeud;$i++){
-        array_push($_distArr, $i);
-        $_distArr[$i]=array();
-        for($j=1;$j<=$nb_noeud;$j++){
-                array_push($_distArr[$i],0);
-        }
-}
 foreach($graphe["edges"] as $arete){
         $_distArr[$arete['from']][$arete['to']]=$arete['value'];
         $_distArr[$arete['to']][$arete['from']]=$arete['value'];
