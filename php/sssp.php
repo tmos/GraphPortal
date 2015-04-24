@@ -53,4 +53,3 @@ for($i=2;$i<=$nb_noeud;$i++){
 	$d[]=$tmp;
 }
 echo json_encode($d);
-?>

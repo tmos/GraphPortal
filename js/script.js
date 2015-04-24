@@ -87,6 +87,12 @@ function generation() {
                 });
             }
             myToogle(pageVisu);
+            if (pageSssp.is(":visible")) {
+                pageSssp.toggle();
+            }
+            if (pageSpaningTree.is(":visible")) {
+                pageSpaningTree.toggle();
+            }
             visuGraph(graph, firstGraphContainer);
         },
         error: function () {

@@ -1,86 +1,60 @@
 <?php
 
-$recu = '{
-    "size": 5,
-    "nodes": [
-        {
-            "id": 1
-        },
-        {
-            "id": 2
-        },
-        {
-            "id": 3
-        },
-        {
-            "id": 4
-        },
-        {
-            "id": 5
-        }
-    ],
-    "edges": [
-        {
-            "from": 1,
-            "to": 3,
-            "weight": 10
-        },
-        {
-            "from": 2,
-            "to": 3,
-            "weight": 5
-        },
-        {
-            "from": 1,
-            "to": 4,
-            "weight": 3
-        },
-        {
-            "from": 1,
-            "to": 2,
-            "weight": 2
-        },
-        {
-            "from": 1,
-            "to": 5,
-            "weight": 7
-        },
-        {
-            "from": 3,
-            "to": 5,
-            "weight": 2
-        },
-        {
-            "from": 4,
-            "to": 5,
-            "weight": 8
-        }
-    ]
-}';
-
+$received = $_POST['graph'];
 $graph=array();
-$graph=json_decode($recu, true);
+$graph=json_decode($received, true);
 
+function adjacentEdges($edges, $node) {
+    $res = array();
+    for($i = 0; $i < count($edges); $i++) {
+        $currentEdge = $edges[$i];
+        if ($currentEdge ['from'] == $node || $currentEdge ['to'] == $node) {
+            $res[] = $currentEdge ;
+        }
+    }
+    return $res;
+}
+function isIn($seeked, $edgeList) {
+    $res = false;
+    foreach ($edgeList as $currentEdge) {
+        if ($currentEdge['from'] == $seeked['from'] && $currentEdge['to'] == $seeked['to'] ) {
+            $res = true;
+            break;
+        }
+    }
+    return $res;
+}
+$allEdges = $graph['edges'];
+$allNodes = $graph['nodes'];
 
-$edges = $graph['edges'];
-$nodes = $graph['nodes'];
-
-// Depart au sommet 1
-$startNode = $nodes[0];
-echo "Start node:   ".$startNode['id']."<br>";
-
-$listCurrentEdges = array();
-$currentEdge = array();
-$currentNode = array();
-$currentNode[] = $nodes[0];
+$spanningNodes[] = $allNodes[0]['id'];
 $spanningEdges = array();
-$min = array(
-    'weight' => 11
-);
 
 
-
-
-//echo '<pre>'.json_encode($queue, JSON_PRETTY_PRINT).'</pre>';
-
-
+$i = 0;
+while (count($spanningNodes) < count($allNodes) || $i == 500) {
+    $min = array(
+        'weight' => 11
+    );
+    // Pour tous les noeuds dans le spaningTree
+    foreach ($spanningNodes as $node) {
+        // Pour toutes les arrêtes adjacentes à ces noeuds
+        foreach (adjacentEdges($allEdges, $node) as $currentEdge) {
+            // Si l'arête courante n'est pas déjà enregistrée
+            if (!isIn($currentEdge, $spanningEdges)) {
+                // On récupère l'arrête de poids minimal
+                if ($currentEdge['weight'] < $min['weight']) {
+                    // Si le nouveau noeud n'est pas dans spanningNodes
+                    if (!in_array($currentEdge['to'], $spanningNodes)) {
+                        $min = $currentEdge;
+                    }
+                }
+            }
+        }
+    }
+    $spanningEdges[] = $min;
+    $spanningNodes[] = $min['to'];
+    $i++;
+}
+$graph['edges'] = $spanningEdges;
+echo json_encode($graph);
