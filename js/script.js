@@ -9,6 +9,10 @@ var graph = {
     edges: []
 };
 var visu;
+
+var firstGraphContainer = document.getElementById("graph");
+var spaningGraphContainer = document.getElementById("spaningCont");
+
 var pageVisu = $('#visualisation');
 var pageSssp = $('#sssp');
 var pageSpaningTree = $('#spaningTree');
@@ -18,7 +22,7 @@ var ssspArray = $('#tableau');
 function contains(array, id) {
     for (var i = 0; i < array.length; i++) {
         return (array[i][0].id === id)
-    }
+    };
     return false;
 }
 function newGraph() {
@@ -83,7 +87,7 @@ function generation() {
                 });
             }
             myToogle(pageVisu);
-            visuGraph();
+            visuGraph(graph, firstGraphContainer);
         },
         error: function () {
             alert("ko");
@@ -98,8 +102,9 @@ function sssp() {
         data: {graph: JSON.stringify(graph)},
         success: function (data) {
             var result = $.parseJSON(data);
+            ssspArray.empty();
             var htmlToAppend;
-    console.log(data);
+
             for (i = 0; i < result.length; i++) {
                 htmlToAppend +=
                     "<tr>" +
@@ -107,7 +112,7 @@ function sssp() {
                         "<td>" + result[i].to + "</td>" +
                         "<td>" + result[i].weight + "</td>" +
                     "</tr>";
-            }
+            };
             ssspArray.append(htmlToAppend);
 
             myToogle(pageSssp);
@@ -124,9 +129,8 @@ function spaningTree() {
         url: "php/spaningTree.php",
         data: {graph: JSON.stringify(graph)},
         success: function (data) {
-            var result = $.parseJSON(data);
-
             myToogle(pageSpaningTree);
+            visuGraph($.parseJSON(data), spaningGraphContainer);
         },
         error: function () {
             alert("ko");
@@ -134,27 +138,15 @@ function spaningTree() {
     });
 };
 
-function visuGraph() {
-    var data = graph;
-    var container = document.getElementById("graph");
+function visuGraph(graph, container) {
     var options = {
         width: '900px',
-        height: '500px',
-        tooltip: {
-            delay: 300,
-            fontColor: "black",
-            fontSize: 14, // px
-            fontFace: "verdana",
-            color: {
-                border: "#666",
-                background: "#FFFFC6"
-            }
-        }
+        height: '500px'
         //,dataManipulation: {
         //    enabled: true,
         //    initiallyVisible: false
         //}
     };
 
-    visu = new vis.Network(container, data, options);
+    visu = new vis.Network(container, graph, options);
 }
