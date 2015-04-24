@@ -1,9 +1,9 @@
 <?php
 
-//$maxN = 5;
-//$complexity = 50;
-$maxN = $_POST['numberOfNodes'];
-$complexity = $_POST['complexity'];
+$maxN = 5;
+$complexity = 50;
+//$maxN = $_POST['numberOfNodes'];
+//$complexity = $_POST['complexity'];
 $nodes = array();
 $edges = array();
 
@@ -41,13 +41,14 @@ while($isGenerating) {
   }
 }
 
+
 $arr = array(
   'size' => $maxN,
   'nodes' => $nodes,
   'edges' => $edges
 );
 
-//echo '<pre>'.json_encode($arr, JSON_PRETTY_PRINT).'</pre>';
-echo json_encode($arr);
+echo '<pre>'.json_encode($arr, JSON_PRETTY_PRINT).'</pre>';
+//echo json_encode($arr);
 
 ?>
